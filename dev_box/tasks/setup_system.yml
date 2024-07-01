@@ -1,26 +1,16 @@
 ---
-- name: Get files to copy
-  ansible.builtin.find:
-    paths: "{{ role_path }}/files/os/"
-    recurse: true
-  register: system_files
-
-- name: Get templates to use
-  ansible.builtin.find:
-    paths: "{{ role_path }}/templates/os/"
-    recurse: true
-  register: system_template_files
-
 - name: Copy system files
   become: true
   ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/{{ item | relpath('files/os/') }}"
-  loop: "{{ system_files.files | map(attribute='path') | map('relpath', role_path) }}"
+    src: "{{ item.src }}"
+    dest: "/{{ item.path | relpath('os/') }}"
+  with_filetree: "files/os"
+  when: item.state == 'file'
 
 - name: Copy templated system files
   become: true
   ansible.builtin.template:
-    src: "{{ item }}"
-    dest: "/{{ item | splitext | first | relpath('templates/os/') }}"
-  loop: "{{ system_template_files.files | map(attribute='path') | map('relpath', role_path) }}"
+    src: "{{ item.src }}"
+    dest: "/{{ item.path | splitext | first | relpath('os/') }}"
+  with_filetree: "templates/os"
+  when: item.state == 'file'
