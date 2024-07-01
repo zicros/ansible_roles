@@ -1,0 +1,21 @@
+---
+- name: Symlink ZSHRC
+  ansible.builtin.file:
+    src: "{{ user_config }}/zsh/.zshrc"
+    dest: "{{ user.home }}/.zshrc"
+    state: link
+  when: 0 == 1
+
+- name: Symlink configs
+  become: true
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  loop:
+    - { src: "{{ user.home }}/.custom/.config/zsh/profiles", dest: "{{ user_config }}/zsh/profiles" }
+    - { src: "{{ user.home }}/.custom/.config/nvim-profile", dest: "{{ user_config }}/nvim-profile" }
+
+- name: Change to ZSH shell
+  become: true
+  ansible.builtin.shell: "usermod -s $(which zsh) {{ user.name }}"

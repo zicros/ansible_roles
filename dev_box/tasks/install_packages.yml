@@ -1,0 +1,24 @@
+---
+- name: Install packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - ripgrep
+    - fzf
+    - neovim
+    - tmux
+    - zsh
+    - gcc
+    - cmake
+    - jq
+    - ca-certificates
+    - curl
+    - gpg
+    - texlive
+    - texlive-latex-extra
+
+- name: Install docker
+  ansible.builtin.include_tasks:
+    file: install_docker.yml
