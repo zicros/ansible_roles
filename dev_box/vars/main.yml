@@ -1,2 +1,5 @@
-config_relpath_home: ".config"
-profile_relpath_home: ".custom"
+_config_relpath_home: ".config"
+_profile_relpath_home: ".custom"
+
+user_config: "{{ ansible_user_dir }}/{{ _config_relpath_home }}"
+user_profile: "{{ ansible_user_dir }}/{{ _profile_relpath_home }}"

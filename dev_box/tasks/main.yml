@@ -1,21 +1,4 @@
 ---
-- name: Set user info variable
-  ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
-    state: present
-  register: user
-- name: Set config info variable
-  ansible.builtin.set_fact:
-    user_config: "{{ user.home }}/{{ config_relpath_home }}"
-- name: Set profile info variable
-  ansible.builtin.set_fact:
-    user_profile: "{{ user.home }}/{{ profile_relpath_home }}"
-- name: Print user info
-  ansible.builtin.debug:
-    var: user
-- name: Print user config info
-  ansible.builtin.debug:
-    var: user_config
 - name: Install packages
   ansible.builtin.include_tasks:
     file: install_packages.yml
