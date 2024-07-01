@@ -1,0 +1,2 @@
+config_relpath_home: ".config"
+profile_relpath_home: ".custom"

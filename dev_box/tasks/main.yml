@@ -5,7 +5,10 @@
   register: user
 - name: Set config info variable
   ansible.builtin.set_fact:
-    user_config: "{{ user.home }}/.config"
+    user_config: "{{ user.home }}/{{ config_relpath_home }}"
+- name: Set profile info variable
+  ansible.builtin.set_fact:
+    user_profile: "{{ user.home }}/{{ profile_relpath_home }}"
 - name: Print user info
   ansible.builtin.debug:
     var: user

@@ -13,8 +13,8 @@
     dest: "{{ item.dest }}"
     state: link
   loop:
-    - { src: "{{ user.home }}/.custom/.config/zsh/profiles", dest: "{{ user_config }}/zsh/profiles" }
-    - { src: "{{ user.home }}/.custom/.config/nvim-profile", dest: "{{ user_config }}/nvim-profile" }
+    - { src: "{{ user_profile }}/.config/zsh/profiles", dest: "{{ user_config }}/zsh/profiles" }
+    - { src: "{{ user_profile }}/.config/nvim-profile", dest: "{{ user_config }}/nvim-profile" }
 
 - name: Change to ZSH shell
   become: true
