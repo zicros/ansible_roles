@@ -1,10 +1,10 @@
 ---
-- name: Symlink ZSHRC
-  ansible.builtin.file:
-    src: "{{ user_config }}/zsh/.zshrc"
-    dest: "{{ ansible_user_dir }}/.zshrc"
-    state: link
-  when: 0 == 1
+- name: Copy user templated files
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ ansible_user_dir }}/{{ item.path | splitext | first }}"
+  with_filetree: "templates/home"
+  when: item.state == 'file'
 
 - name: Symlink configs
   become: true

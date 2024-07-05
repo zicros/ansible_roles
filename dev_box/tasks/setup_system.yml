@@ -3,7 +3,7 @@
   become: true
   ansible.builtin.copy:
     src: "{{ item.src }}"
-    dest: "/{{ item.path | relpath('os/') }}"
+    dest: "/{{ item.path }}"
   with_filetree: "files/os"
   when: item.state == 'file'
 
@@ -11,6 +11,6 @@
   become: true
   ansible.builtin.template:
     src: "{{ item.src }}"
-    dest: "/{{ item.path | splitext | first | relpath('os/') }}"
+    dest: "/{{ item.path | splitext | first }}"
   with_filetree: "templates/os"
   when: item.state == 'file'
