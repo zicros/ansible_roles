@@ -1,0 +1,12 @@
+---
+- name: Load dotfile configuration
+  ansible.builtin.include_vars:
+    file: dotfiles_config.yml
+
+- name: Linking TMUX config files
+  ansible.builtin.file:
+    src: "{{ base_dotfiles.path }}/{{ item.src }}"
+    dest: "{{ ansible_user_dir }}/{{ item.dst }}"
+    state: link
+  loop: "{{ base_dotfiles.configs | map('extract', _base_dotfiles_config, 'paths') | flatten }}"
+  when: base_dotfiles.configs is defined

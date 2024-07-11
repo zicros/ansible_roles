@@ -1,0 +1,5 @@
+_base_dotfiles_config:
+  tmux:
+    paths:
+      - src: .tmux.conf
+        dst: .tmux.conf

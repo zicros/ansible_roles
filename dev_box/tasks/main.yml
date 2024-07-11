@@ -1,10 +1,24 @@
 ---
+- name: Use a base dotfile config
+  ansible.builtin.include_tasks:
+    file: setup_base_dotfile.yml
+  when: base_dotfiles is defined | bool
+
+- meta: end_play
+  when: 1 == 1
+
 - name: Install packages
   ansible.builtin.include_tasks:
     file: install_packages.yml
+
 - name: Map profiles to current configuration
   ansible.builtin.include_tasks:
     file: setup_profiles.yml
+
+- name: Use a base dotfile config
+  ansible.builtin.include_tasks:
+    file: setup_base_dotfile.yml
+
 - name: Set up the system
   ansible.builtin.include_tasks:
     file: setup_system.yml
