@@ -3,7 +3,7 @@
   ansible.builtin.include_vars:
     file: dotfiles_config.yml
 
-- name: Linking TMUX config files
+- name: Linking base dotfiles
   ansible.builtin.file:
     src: "{{ base_dotfiles.path }}/{{ item.src }}"
     dest: "{{ ansible_user_dir }}/{{ item.dst }}"

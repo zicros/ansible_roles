@@ -6,16 +6,6 @@
   with_filetree: "templates/home"
   when: item.state == 'file'
 
-- name: Symlink configs
-  become: true
-  ansible.builtin.file:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    state: link
-  loop:
-    - { src: "{{ user_profile }}/.config/zsh/profiles", dest: "{{ user_config }}/zsh/profiles" }
-    - { src: "{{ user_profile }}/.config/nvim-profile", dest: "{{ user_config }}/nvim-profile" }
-
 - name: Change to ZSH shell
   become: true
   ansible.builtin.shell: "usermod -s $(which zsh) {{ ansible_user_id }}"

@@ -3,3 +3,13 @@ _base_dotfiles_config:
     paths:
       - src: .tmux.conf
         dst: .tmux.conf
+  zsh:
+    paths:
+      - src: .zshrc
+        dst: .zshrc
+      - src: .config/zsh/.zshrc
+        dst: .config/zsh/.zshrc
+      - src: .config/zsh/init
+        dst: .config/zsh/init
+      - src: .config/zsh/themes
+        dst: .config/zsh/themes
