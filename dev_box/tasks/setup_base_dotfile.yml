@@ -9,4 +9,11 @@
     dest: "{{ ansible_user_dir }}/{{ item.dst }}"
     state: link
   loop: "{{ base_dotfiles.configs | map('extract', _base_dotfiles_config, 'paths') | flatten }}"
-  when: base_dotfiles.configs is defined
+  when: (item.type | default('symlink')) == 'symlink'
+
+- name: Using templated dotfiles
+  ansible.builtin.template:
+    src: "templates/{{ item.src }}"
+    dest: "{{ ansible_user_dir }}/{{ item.dst }}"
+  loop: "{{ base_dotfiles.configs | map('extract', _base_dotfiles_config, 'paths') | flatten }}"
+  when: (item.type | default(omit)) == 'template'

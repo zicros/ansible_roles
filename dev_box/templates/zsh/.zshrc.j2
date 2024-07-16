@@ -1,0 +1,16 @@
+# This is a generated file. DO NOT MODIFY.
+source {{ base_dotfiles.path }}/.zshrc
+
+{% if 'bin' in base_dotfiles.configs %}
+# Only add to path if it's not in the path already.
+# https://unix.stackexchange.com/questions/124444/how-can-i-cleanly-add-to-path
+add_to_path() {
+    case ":${PATH:=$1}:" in
+        *:"$1":*) ;;
+        *) PATH="$1:$PATH" ;;
+    esac;
+}
+
+add_to_path "{{ base_dotfiles.path }}/.local/bin"
+
+{% endif %}

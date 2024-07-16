@@ -1,12 +1,17 @@
 _base_dotfiles_config:
+  bin:
+    paths:
   tmux:
     paths:
       - src: .tmux.conf
         dst: .tmux.conf
   zsh:
     paths:
-      - src: .zshrc
+      # Template that will point to the base .zshrc and adds additional paths depending on configs
+      # that were specified.
+      - src: zsh/.zshrc.j2
         dst: .zshrc
+        type: template
       - src: .config/zsh/.zshrc
         dst: .config/zsh/.zshrc
       - src: .config/zsh/init
