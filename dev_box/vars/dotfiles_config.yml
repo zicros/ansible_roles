@@ -18,3 +18,7 @@ _base_dotfiles_config:
         dst: .config/zsh/init
       - src: .config/zsh/themes
         dst: .config/zsh/themes
+  topydo:
+    paths:
+      - src: .config/topydo/config
+        dst: .config/topydo/config
